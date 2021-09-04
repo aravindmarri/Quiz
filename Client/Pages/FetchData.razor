@@ -1,46 +1,99 @@
-﻿@page "/fetchdata"
+﻿@page "/"
 @using QuizWebApp.Shared
 @inject HttpClient Http
+<div class="page" style="background-image: url(https://www.google.com/url?sa=i&url=https%3A%2F%2Fcomuti.in%2F&psig=AOvVaw2VKs4723W8t8FHMn530HqX&ust=1630824282369000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCLDJ-Ybc5PICFQAAAAAdAAAAABAD)">
 
-<h1>Weather forecast</h1>
-
-<p>This component demonstrates fetching data from the server.</p>
-
-@if (forecasts == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var forecast in forecasts)
-            {
-                <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-
-@code {
-    private WeatherForecast[] forecasts;
-
-    protected override async Task OnInitializedAsync()
+    @switch (questionIndex)
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+        case 0:<h3>Click Start to start the test</h3>
+            break;
+        case 1:<p>@questions[0].QuestionsData</p>
+
+        @foreach (var item1 in questions[0].OptionsData)
+        {
+            <p style="column-width:400px">
+                <input type="checkbox" bind="@item1" />
+                <label for="addition">@item1</label>
+            </p>
+        }
+        break;
+    case 2:<p>@questions[1].QuestionsData</p>
+
+    @foreach (var item1 in questions[1].OptionsData)
+    {
+        <p style="column-width:400px">
+            <input type="checkbox" bind="@item1" />
+            <label for="addition">@item1</label>
+        </p>
+    }
+    break;
+case 3:<p>@questions[2].QuestionsData</p>
+
+@foreach (var item1 in questions[2].OptionsData)
+{
+    <p style="column-width:400px">
+        <input type="checkbox" bind="@item1" />
+        <label for="addition">@item1</label>
+    </p>
+}
+break;
+case 4:<p>@questions[3].QuestionsData</p>
+
+@foreach (var item1 in questions[3].OptionsData)
+{
+    <p style="column-width:400px">
+        <input type="checkbox" bind="@item1" />
+        <label for="addition">@item1</label>
+    </p>
+}
+
+
+
+break;
+
+}
+
+
+
+
+
+    @if (questionIndex <= 4)
+    {
+        <button @onclick="NextButtonClicked" style="float:right; outline-color :black; background-color:green;color:white;width:stretch;" class="btn-primary">@ButtonText</button>
+
+    }
+    else
+    {
+        <h3>ThankYou</h3>
+        <button @onclick="CloseButtonClicked" style="float:right; outline-color :black; background-color:green;color:white;width:stretch;" class="btn-primary">Close</button>
+
     }
 
+
+
+</div>
+
+@code {
+    [Inject]
+    public NavigationManager navigationManager { get; set; }
+    private Question[] questions;
+    private int questionIndex = 0;
+    private string ButtonText = "Start";
+    protected override async Task OnInitializedAsync()
+    {
+        questions = await Http.GetFromJsonAsync<Question[]>("Question");
+    }
+    void CloseButtonClicked()
+    {
+        navigationManager.NavigateTo("", true);
+    }
+    void NextButtonClicked()
+    {
+        questionIndex = questionIndex + 1;
+        ButtonText = "Next";
+        if (questionIndex == 4)
+        {
+            ButtonText = "Submit";
+        }
+    }
 }
