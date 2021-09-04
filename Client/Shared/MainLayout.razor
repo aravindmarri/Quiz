@@ -1,20 +1,34 @@
 ﻿@inherits LayoutComponentBase
-
-<div class="page">
-    <div class="sidebar">
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon=@( _drawerOpen ? @Icons.Material.Filled.Close : @Icons.Material.Filled.Menu) Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        <MudText Typo="Typo.h5" Class="ml-3"> QuizWebApp </MudText>
+        <MudSpacer />
+        <MudIconButton Icon="@Icons.Material.Filled.Person" Color="Color.Inherit" Edge="Edge.End" />
+    </MudAppBar>
+    <MudDrawer @bind-Open="_drawerOpen" Elevation="2">
+        <MudDrawerHeader Class="justify-space-between align-center">
+            <MudText Typo="Typo.h5" Class="mt-1">Menu</MudText>
+            <div class="mobile-closebtn">
+                <MudIconButton Icon=@Icons.Material.Filled.Close Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+            </div>
+        </MudDrawerHeader>
         <NavMenu />
-    </div>
+    </MudDrawer>
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
+@code {
+    
+    public static bool _drawerOpen = true;
 
-    <div class="main">
-        <div class="top-row px-4">
-            <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
-        </div>
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}
 
-        <div class="content px-4">
-            @Body
-        </div>
-    </div>
-</div>
 <MudThemeProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
