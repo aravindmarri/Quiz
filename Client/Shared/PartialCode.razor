@@ -1,0 +1,17 @@
+﻿<p>@question</p>
+
+@foreach (var item1 in OptionData)
+{
+    <p style="column-width:400px">
+        <input type="checkbox" bind="@item1" />
+        <label for="addition">@item1</label>
+    </p>
+}
+
+@code {
+    // Demonstrates how a parent component can supply parameters
+    [Parameter]
+    public string question { get; set; }
+    [Parameter]
+    public List<string> OptionData { get; set; }
+}
