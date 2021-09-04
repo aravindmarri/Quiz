@@ -8,7 +8,6 @@ namespace QuizWebApp.Shared
 {
     public class Question
     {
-
         public string QuestionsData { get; set; }
         public List<string> OptionsData { get; set; }
 

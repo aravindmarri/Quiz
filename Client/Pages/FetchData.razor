@@ -7,70 +7,30 @@
     {
         case 0:<h3>Click Start to start the test</h3>
             break;
-        case 1:<p>@questions[0].QuestionsData</p>
-
-        @foreach (var item1 in questions[0].OptionsData)
-        {
-            <p style="column-width:400px">
-                <input type="checkbox" bind="@item1" />
-                <label for="addition">@item1</label>
-            </p>
-        }
-        break;
-    case 2:<p>@questions[1].QuestionsData</p>
-
-    @foreach (var item1 in questions[1].OptionsData)
-    {
-        <p style="column-width:400px">
-            <input type="checkbox" bind="@item1" />
-            <label for="addition">@item1</label>
-        </p>
+        case 1:
+            <PartialCode question="@questions[0].QuestionsData" OptionData="questions[0].OptionsData" />
+            break;
+        case 2:
+            <PartialCode question="@questions[1].QuestionsData" OptionData="questions[1].OptionsData" />
+            break;
+        case 3:
+            <PartialCode question="@questions[2].QuestionsData" OptionData="questions[2].OptionsData" />
+            break;
+        case 4:
+            <PartialCode question="@questions[3].QuestionsData" OptionData="questions[3].OptionsData" />
+            break;
     }
-    break;
-case 3:<p>@questions[2].QuestionsData</p>
-
-@foreach (var item1 in questions[2].OptionsData)
-{
-    <p style="column-width:400px">
-        <input type="checkbox" bind="@item1" />
-        <label for="addition">@item1</label>
-    </p>
-}
-break;
-case 4:<p>@questions[3].QuestionsData</p>
-
-@foreach (var item1 in questions[3].OptionsData)
-{
-    <p style="column-width:400px">
-        <input type="checkbox" bind="@item1" />
-        <label for="addition">@item1</label>
-    </p>
-}
-
-
-
-break;
-
-}
-
-
-
-
-
-    @if (questionIndex <= 4)
-    {
+     @if (questionIndex <= 4)
+     {
         <button @onclick="NextButtonClicked" style="float:right; outline-color :black; background-color:green;color:white;width:stretch;" class="btn-primary">@ButtonText</button>
 
-    }
-    else
-    {
+     }
+     else
+     {
         <h3>ThankYou</h3>
         <button @onclick="CloseButtonClicked" style="float:right; outline-color :black; background-color:green;color:white;width:stretch;" class="btn-primary">Close</button>
 
-    }
-
-
-
+     }
 </div>
 
 @code {
