@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
 <MudLayout>
-    <MudAppBar Elevation="1">
+    <MudAppBar Elevation="1" style="height: 64px">
         <MudIconButton Icon=@( _drawerOpen ? @Icons.Material.Filled.Close : @Icons.Material.Filled.Menu) Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         <MudText Typo="Typo.h5" Class="ml-3"> QuizWebApp </MudText>
         <MudSpacer />

@@ -1,11 +1,72 @@
-﻿@page "/Quiz"
-    <link href="/scss/Quiz.css" rel="stylesheet" />
-    
-<section>
+﻿@page "/"
+@using QuizWebApp.Shared
+@inject HttpClient Http
+<link href="/scss/Quiz.css" rel="stylesheet" />
+
+<section class="main-screen">
     <div class="quiz-screen">
-        
-        <section>
-            <h3>Question and answer?</h3>
+        <section class="quiz_section">
+            <div class="options-screen d-flex align-center justify-space-between">
+
+                @switch (questionIndex)
+                {
+                    case 0:<h3>Click Start to start the test</h3>
+                        break;
+                    case 1:
+                        <PartialCode question="@questions[0].QuestionsData" OptionData="questions[0].OptionsData" />
+                        break;
+                    case 2:
+                        <PartialCode question="@questions[1].QuestionsData" OptionData="questions[1].OptionsData" />
+                        break;
+                    case 3:
+                        <PartialCode question="@questions[2].QuestionsData" OptionData="questions[2].OptionsData" />
+                        break;
+                    case 4:
+                        <PartialCode question="@questions[3].QuestionsData" OptionData="questions[3].OptionsData" />
+                        break;
+                }
+                @if (questionIndex > 4)
+                {
+                    <h3>ThankYou</h3>
+                }
+                <div class="btn-container d-flex align-end">
+                    @if (questionIndex <= 4)
+                    {
+                        <MudButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" @onclick="NextButtonClicked">@ButtonText</MudButton>
+                    }
+                    else
+                    {
+                        <MudButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" @onclick="CloseButtonClicked">Close</MudButton>
+                    }
+                </div>
+
+            </div>
         </section>
     </div>
 </section>
+
+@code {
+    [Inject]
+    public NavigationManager navigationManager { get; set; }
+    private Question[] questions;
+    private int questionIndex = 0;
+    private string ButtonText = "Start";
+    protected override async Task OnInitializedAsync()
+    {
+        questions = await Http.GetFromJsonAsync<Question[]>("Question");
+    }
+    void CloseButtonClicked()
+    {
+        navigationManager.NavigateTo("/", true);
+    }
+    void NextButtonClicked()
+    {
+        questionIndex = questionIndex + 1;
+        ButtonText = "Next";
+        if (questionIndex == 4)
+        {
+            ButtonText = "Submit";
+        }
+    }
+
+}
