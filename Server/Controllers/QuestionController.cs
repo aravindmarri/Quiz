@@ -27,10 +27,10 @@ namespace QuizWebApp.Server.Controllers
         [HttpGet]
         public IEnumerable<Question> Get()
         {
-            Question[] Questions = new Question[] { new Question { QuestionsData = "Question1", OptionsData = new List<string> { "a", "b", "c", "d" } },
-                                                 new Question { QuestionsData = "Question2", OptionsData = new List<string> { "a", "b", "c", "d" } },
-                                                 new Question { QuestionsData = "Question3", OptionsData = new List<string> { "a", "b", "c", "d" } },
-                                                 new Question { QuestionsData = "Question4", OptionsData = new List<string> { "a", "b", "c", "d" } }
+            Question[] Questions = new Question[] { new Question { QuestionsData = "Which of the following is a reserved keyword in C#?", OptionsData = new List<string> { "abstract", "foreach", "as", "info" } },
+                                                 new Question { QuestionsData = " CLR is the .Net equivalent of _____", OptionsData = new List<string> { "Java Virtual machine", "Common Language Runtime", "Common Type System", "Common Language Specification" } },
+                                                 new Question { QuestionsData = "The space required for structure variables is allocated on the stack.", OptionsData = new List<string> { "True", "False", "May be", "Can’t say" } },
+                                                 new Question { QuestionsData = "Abstract class contains _____", OptionsData = new List<string> { "Abstract methods", "Non Abstract methods", "Static methods", "Void methods" } }
                 };
             return Questions;
         }

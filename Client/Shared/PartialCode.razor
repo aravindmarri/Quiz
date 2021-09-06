@@ -1,17 +1,35 @@
-﻿<p>@question</p>
+﻿<section class="options-page">
+    <h2>@question</h2>
+    @foreach (var item1 in OptionData) 
 
-@foreach (var item1 in OptionData)
-{
-    <p style="column-width:400px">
-        <input type="checkbox" bind="@item1" />
-        <label for="addition">@item1</label>
-    </p>
-}
-
+    {
+    <section class="options_container unchecked" for="checkbox" onclick="toggleCheck">
+        <div class="inner flex-row d-flex align-center">
+            <div class="d-flex align-center justify-center option-field ">
+                <input id="checkbox" type="checkbox" bind="@item1" />
+            </div>
+            <div class="option-text  d-flex">
+                @item1
+            </div>
+            <div>
+                <div class="option-icon">
+                    <MudIcon Icon="@Icons.Material.Filled.Done" Size="Size.Small" />
+                </div>
+            </div>
+        </div>
+    </section>
+    }
+</section>
 @code {
     // Demonstrates how a parent component can supply parameters
     [Parameter]
     public string question { get; set; }
     [Parameter]
     public List<string> OptionData { get; set; }
+    public bool checkIcon  = false;
+
+    void toggleCheck()
+    {
+        checkIcon = !checkIcon;
+    }
 }

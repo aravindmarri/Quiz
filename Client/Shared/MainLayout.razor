@@ -1,10 +1,34 @@
 ﻿@inherits LayoutComponentBase
-
-<div class="page">
+<MudLayout>
+    <MudAppBar Elevation="1" style="height: 64px">
+        <MudIconButton Icon=@( _drawerOpen ? @Icons.Material.Filled.Close : @Icons.Material.Filled.Menu) Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        <MudText Typo="Typo.h5" Class="ml-3"> QuizWebApp </MudText>
+        <MudSpacer />
+        <MudIconButton Icon="@Icons.Material.Filled.Person" Color="Color.Inherit" Edge="Edge.End" />
+    </MudAppBar>
+    <MudDrawer @bind-Open="_drawerOpen" Elevation="2">
+        <MudDrawerHeader Class="justify-space-between align-center">
+            <MudText Typo="Typo.h5" Class="mt-1">Menu</MudText>
+            <div class="mobile-closebtn">
+                <MudIconButton Icon=@Icons.Material.Filled.Close Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+            </div>
+        </MudDrawerHeader>
+        <NavMenu />
+    </MudDrawer>
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
+@code {
     
-    <div class="main">
-        <div class="content px-4">
-            @Body
-        </div>
-    </div>
-</div>
+    public static bool _drawerOpen = true;
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}
+
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />

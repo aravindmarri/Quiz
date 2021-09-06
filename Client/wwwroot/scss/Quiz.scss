@@ -1,0 +1,122 @@
+﻿
+.main-screen {
+    height: calc(100vh - 64px);
+    .quiz-screen {
+        background: #fff url(../images/screen1.jpg) no-repeat;
+        height: 100%;
+        background-size: cover;
+        .quiz_section {
+            color: #fff;
+            height: 100%;
+            padding: 20px;
+            .options-screen {
+                height: 100%;
+                .btn-container {
+                    height: 100%;
+                    padding: 20px;
+                }
+            }
+        }
+    }
+}
+.options-page {
+    animation: move 0.5s;
+    width: 100%;
+    padding: 24px;
+    position: relative;
+
+    .options_container {
+        max-width: 300px;
+        margin-bottom: 10px;
+
+        .inner {
+            position: relative;
+            border-radius: 4px;
+            background-color: #ffffff1a;
+            box-shadow: #ffffffcc 0px 0px 0px 2px inset;
+            color: #ffffff;
+            max-width: 100%;
+            min-width: 75px;
+            min-height: 40px;
+            outline: 0px;
+            padding: 4px;
+            width: 100%;
+            cursor: pointer;
+            opacity: 1;
+
+            .option-field {
+                position: relative;
+                width: 24px;
+                min-width: 22px;
+                height: 24px;
+                margin: 4px;
+                border-radius: 2px;
+                font-size: 12px;
+                line-height: 16px;
+                font-family: sans-serif;
+            }
+
+            .option-text {
+                flex: 1 1 0%;
+            }
+        }
+    }
+}
+.checked {
+    background-color: #ffffff30;
+
+    .inner {
+        .option-field {
+            border-color: #ffffff;
+            background-color: #ffffff;
+            color: #22212f;
+        }
+
+        .option-icon {
+            display: block;
+        }
+    }
+}
+.unchecked {
+    .inner {
+        .option-field {
+            border-color: #ffffff99;
+            background-color: #ffffff33;
+            color: #fff;
+        }
+
+        .option-icon {
+            display: none;
+        }
+    }
+}
+
+@media (max-width: 600px){
+    .options-screen {
+        flex-direction: column;
+
+        .options-page {
+            padding: 0 !important;
+
+            .options_container {
+                max-width: 100% !important;
+            }
+        }
+
+        .btn-container {
+            justify-content: end;
+            height: auto !important;
+            width: 100%;
+            padding: 0 !important;
+        }
+    }
+}
+@keyframes move {
+    from {
+        left: 100px;
+    }
+
+    to {
+        left: 0;
+    }
+}
